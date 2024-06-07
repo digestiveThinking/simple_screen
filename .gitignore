@@ -1,5 +1,7 @@
 venv/
 .vscode/
-**__pychache__/
+**__pycache__/
 dist/
 simple_screen.egg-info/
+probes/
+hola**.py

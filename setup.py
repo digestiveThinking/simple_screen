@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Mon Maldonado", 
     author_email="monterdi@gmail.com",
-    url="...",
+    url="https://github.com/digestiveThinking/simple_screen",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
