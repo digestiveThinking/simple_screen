@@ -95,14 +95,13 @@ def Print(cadena: object = "", refresh: bool = True):
     _retrievePos()
 
 
-
-
 def Input(mensaje: str = "") -> str:
     curses.curs_set(1)
     STDSRC.addstr(mensaje, curses.color_pair(ACTIVE_PAIR))
     curses.echo()
     user_input = STDSRC.getstr(curses.color_pair(ACTIVE_PAIR)).decode('utf-8')
     curses.noecho()
+    curses.curs_set(0)
     _retrievePos()
     return user_input
 

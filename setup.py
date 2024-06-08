@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="simple_screen",
-    version="0.1.2",
+    version="0.1.3",
     packages=find_packages(),
     include_package_data=True,
     description="Ease of managing color and positioning prints and supplies for teaching purposes.",
