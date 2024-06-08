@@ -17,32 +17,37 @@ Aquí tienes un listado de las funciones públicas del archivo proporcionado jun
 3. **finish()**
    - Finaliza el uso de curses y restaura la configuración del terminal a su estado original.
 
-4. **cls(refresh: bool = False)**
+4. **cls(refresh: bool = True)**
    - Limpia la pantalla y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
 
-5. **locate(x: int, y: int)**
+5. **locate(x: int, y: int, cad: str = None)**
    - Mueve el cursor a la posición (x, y) especificada en la pantalla.
    - Si x o y está fuera de los límites de la terminal se produce una excepcion OverflowError.
+   - Si se informa cad, lo imprime en la posición indicada, sin salto de línea.
 
-6. **Print(cadena: object = "", refresh: bool = False)**
+6. **Print(cadena: object = "", refresh: bool = True)**
    - Imprime una cadena en la pantalla en la posición actual del cursor y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
+   - Situa el cursor en la línea siguiente (salto de línea siempre)
 
 7. **Input(mensaje: str = "") -> str**
    - Muestra un mensaje en la pantalla y espera la entrada del usuario. Devuelve la cadena de entrada del usuario.
 
-8. **pair(_pen: Color, _paper: Color, refresh: bool = False)**
+8. **inkey(timeout: int = 100) -> str**
+   - Espera el tiempo indicado en timeout en milisegundos para la pulsacion de una tecla. Si no se pulsa nada devuelve "" en otro caso devuelve su caracter.
+
+9. **pair(_pen: Color, _paper: Color, refresh: bool = True)**
    - Configura el par de colores activo con los colores de primer plano (_pen) y fondo (_paper) especificados, y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
 
-9. **pen(color: Color, refresh: bool = False)**
+10. **pen(color: Color, refresh: bool = True)**
    - Cambia el color del "bolígrafo" (texto) al color de primer plano especificado y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
 
-10. **paper(color: Color, refresh: bool = False)**
+11. **paper(color: Color, refresh: bool = True)**
     - Cambia el color del "papel" (fondo) al color de fondo especificado y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
 
-11. **app(func: Callable[..., None]) -> Callable[..., None]**
+12. **app(func: Callable[..., None]) -> Callable[..., None]**
     - Decorador que asegura que la función proporcionada se ejecute en un contexto de curses y llama a `_end()` al finalizar la ejecución.
 
-12. **Simple_ScreenContextManager**
+13. **Simple_ScreenContextManager**
     - Clase manejadora de contexto para asegurar que `finish()` se llame al salir del bloque `with`.
 
 ### Explicación detallada de las funciones internas:

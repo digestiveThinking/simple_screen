@@ -13,6 +13,11 @@ MAX_COLORS = -1
 ACTIVE_PAIR = 1
 SCROLLACUM = 0
 
+KEY_UP = chr(curses.KEY_UP)
+KEY_DOwN = chr(curses.KEY_DOWN)
+KEY_LEFT = chr(curses.KEY_LEFT)
+KEY_RIGHT = chr(curses.KEY_RIGHT)
+
 
 class SimpleScreenException(Exception):
     pass
@@ -68,7 +73,7 @@ def cls(refresh: bool = True):
         STDSRC.refresh()
 
 
-def locate(x: int, y: int):
+def locate(x: int, y: int, cad: object = None):
     global SCROLLACUM
     if not (0 <= x <= SHELLDIMENSIONS.w and 0 <= y <= SHELLDIMENSIONS.h):
         raise OverflowError(f"{x}, {y} out of window.")
@@ -80,6 +85,10 @@ def locate(x: int, y: int):
         STDSRC.move(SHELLDIMENSIONS.h - 1, x)
     else:
         STDSRC.move(y, x)
+
+    if cad:
+        STDSRC.addstr(f"{cad}")
+        STDSRC.refresh()
 
 
 def Print(cadena: object = "", refresh: bool = True):
@@ -97,6 +106,7 @@ def Print(cadena: object = "", refresh: bool = True):
 
 def Input(mensaje: str = "") -> str:
     curses.curs_set(1)
+    STDSRC.nodelay(0)
     STDSRC.addstr(mensaje, curses.color_pair(ACTIVE_PAIR))
     curses.echo()
     user_input = STDSRC.getstr(curses.color_pair(ACTIVE_PAIR)).decode('utf-8')
@@ -104,6 +114,15 @@ def Input(mensaje: str = "") -> str:
     curses.curs_set(0)
     _retrievePos()
     return user_input
+
+
+def inkey(timeout: int = 100) -> str:
+    curses.curs_set(0)
+    curses.noecho()
+    STDSRC.nodelay(1)
+    STDSRC.timeout(timeout)
+    key = STDSRC.getch()
+    return "" if key == -1 else chr(key)
 
 
 def _create_color(ix: int, color: Color):
