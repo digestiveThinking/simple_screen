@@ -22,6 +22,7 @@ Aquí tienes un listado de las funciones públicas del archivo proporcionado jun
 
 5. **locate(x: int, y: int)**
    - Mueve el cursor a la posición (x, y) especificada en la pantalla.
+   - Si x o y está fuera de los límites de la terminal se produce una excepcion OverflowError.
 
 6. **Print(cadena: object = "", refresh: bool = False)**
    - Imprime una cadena en la pantalla en la posición actual del cursor y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.

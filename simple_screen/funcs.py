@@ -1,17 +1,21 @@
 import curses
 from .entities import Position, Color, Dimensions
 from typing import Callable
-import os
-
 
 STDSRC = None
 POS = Position(0, 0)
 FOREGROUND = Color(250, 250, 250)
 BACKGROUND = Color(0, 0, 0)
 DIMENSIONS = None
+SHELLDIMENSIONS = None
 MAX_PAIRS = -1
 MAX_COLORS = -1
 ACTIVE_PAIR = 1
+SCROLLACUM = 0
+
+
+class SimpleScreenException(Exception):
+    pass
 
 
 def _init_curses():
@@ -36,9 +40,18 @@ def pause(ms: int):
 
 
 def init():
-    global STDSRC, POS, DIMENSIONS, MAX_PAIRS, MAX_COLORS
+    global STDSRC, POS, DIMENSIONS, MAX_PAIRS, MAX_COLORS, SHELLDIMENSIONS
     STDSRC = _init_curses()
     DIMENSIONS = Dimensions(*STDSRC.getmaxyx())
+    SHELLDIMENSIONS = Dimensions(*STDSRC.getmaxyx())
+    STDSRC.scrollok(True)
+    '''
+    La ventana logica tiene una linea de mas para poder simular 
+    overflow hacia abajo.
+    No hay buffer, al hacer scroll se pierden los contenidos de
+    las lineas superiores
+    '''
+    STDSRC.resize(DIMENSIONS.h + 1, DIMENSIONS.w)
     MAX_PAIRS = curses.COLOR_PAIRS
     MAX_COLORS = curses.COLORS
     pair(FOREGROUND, BACKGROUND)
@@ -48,7 +61,7 @@ def finish():
     _end(STDSRC)
 
 
-def cls(refresh: bool = False):
+def cls(refresh: bool = True):
     STDSRC.clear()
     locate(0, 0)
     if refresh:
@@ -56,18 +69,32 @@ def cls(refresh: bool = False):
 
 
 def locate(x: int, y: int):
-    global POS
-    STDSRC.move(y, x)
-    _retrievePos()
+    global SCROLLACUM
+    if not (0 <= x <= SHELLDIMENSIONS.w and 0 <= y <= SHELLDIMENSIONS.h):
+        raise OverflowError(f"{x}, {y} out of window.")
+    dif = max(0, y - (SHELLDIMENSIONS.h - 1))
+    if dif > 0:
+        STDSRC.resize(y+dif, DIMENSIONS.w)
+        DIMENSIONS.h, DIMENSIONS.w = STDSRC.getmaxyx()
+        SCROLLACUM += 1
+        STDSRC.move(SHELLDIMENSIONS.h - 1, x)
+    else:
+        STDSRC.move(y, x)
 
 
-def Print(cadena: object = "", refresh: bool = False):
-    STDSRC.addstr(str(cadena), curses.color_pair(ACTIVE_PAIR))
+def Print(cadena: object = "", refresh: bool = True):
+    global SCROLLACUM
+
+    STDSRC.addstr(f"{str(cadena)}", curses.color_pair(ACTIVE_PAIR))
+    STDSRC.scroll(SCROLLACUM)
+    SCROLLACUM = 0
+    if refresh:
+        STDSRC.refresh()
     _retrievePos()
     locate(0, POS.y + 1)
     _retrievePos()
-    if refresh:
-        STDSRC.refresh()
+
+
 
 
 def Input(mensaje: str = "") -> str:
@@ -85,11 +112,10 @@ def _create_color(ix: int, color: Color):
 
 
 def _retrievePos():
-    global POS
-    POS = Position(*STDSRC.getyx())
+    POS.y, POS.x = STDSRC.getyx()
 
 
-def pair(_pen: Color, _paper: Color, refresh: bool = False):
+def pair(_pen: Color, _paper: Color, refresh: bool = True):
     global FOREGROUND, BACKGROUND
     _create_color(12, _pen)
     _create_color(13, _paper)
@@ -101,11 +127,11 @@ def pair(_pen: Color, _paper: Color, refresh: bool = False):
         STDSRC.refresh()
 
 
-def pen(color: Color, refresh: bool = False):
+def pen(color: Color, refresh: bool = True):
     pair(color, BACKGROUND, refresh)
 
 
-def paper(color: Color, refresh: bool = False):
+def paper(color: Color, refresh: bool = True):
     pair(FOREGROUND, color, refresh)
 
 

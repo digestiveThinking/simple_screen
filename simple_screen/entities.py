@@ -1,4 +1,5 @@
 from collections import namedtuple
+from dataclasses import dataclass
 
 
 def minmax(_min, _max, value):
@@ -21,11 +22,19 @@ class Color:
 
     def __hash__(self):
         return hash((self.r, self.g, self.b))
-    
+
     @property
     def value(self):
         return self.r, self.g, self.b
 
 
-Position = namedtuple('Position', ['y', 'x'])
-Dimensions = namedtuple('Dimension', ['h', 'w'])
+@dataclass
+class Position:
+    y: int
+    x: int
+
+
+@dataclass
+class Dimensions:
+    h: int
+    w: int

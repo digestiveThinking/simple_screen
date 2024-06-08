@@ -2,4 +2,4 @@ from .colors import *
 from .funcs import *
 
 
-manager = Simple_ScreenContextManager()
+Screen_manager = Simple_ScreenContextManager()

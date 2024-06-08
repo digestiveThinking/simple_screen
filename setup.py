@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="simple_screen",
-    version="0.1",
+    version="0.1.2",
     packages=find_packages(),
     include_package_data=True,
     description="Ease of managing color and positioning prints and supplies for teaching purposes.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="Mon Maldonado", 
+    author="Mon Maldonado",
     author_email="monterdi@gmail.com",
     url="https://github.com/digestiveThinking/simple_screen",
     classifiers=[
