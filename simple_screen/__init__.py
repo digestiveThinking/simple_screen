@@ -1,4 +1,5 @@
 from .colors import *
+from .keys import *
 from .funcs import *
 
 
