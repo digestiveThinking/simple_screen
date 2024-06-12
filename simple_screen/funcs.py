@@ -1,5 +1,6 @@
 import curses
 from .entities import Position, Color, Dimensions
+from .keys import key_map
 from typing import Callable
 
 STDSRC = None
@@ -122,7 +123,7 @@ def inkey(timeout: int = 100) -> str:
     STDSRC.nodelay(1)
     STDSRC.timeout(timeout)
     key = STDSRC.getch()
-    return "" if key == -1 else chr(key)
+    return "" if key == -1 else key_map.get(key, chr(key))
 
 
 def _create_color(ix: int, color: Color):

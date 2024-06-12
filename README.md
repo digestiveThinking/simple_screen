@@ -33,7 +33,7 @@ Aquí tienes un listado de las funciones públicas del archivo proporcionado jun
    - Muestra un mensaje en la pantalla y espera la entrada del usuario. Devuelve la cadena de entrada del usuario.
 
 8. **inkey(timeout: int = 100) -> str**
-   - Espera el tiempo indicado en timeout en milisegundos para la pulsacion de una tecla. Si no se pulsa nada devuelve "" en otro caso devuelve su caracter.
+   - Espera el tiempo indicado en timeout en milisegundos para la pulsacion de una tecla. Si no se pulsa nada devuelve "" en otro caso devuelve su caracter o el nombre de la tecla si es especial.
 
 9. **pair(_pen: Color, _paper: Color, refresh: bool = True)**
    - Configura el par de colores activo con los colores de primer plano (_pen) y fondo (_paper) especificados, y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
