@@ -75,7 +75,7 @@ def cls(refresh: bool = True):
 
 def locate(x: int, y: int, cad: object = None):
     global SCROLLACUM
-    if not (0 <= x <= SHELLDIMENSIONS.w and 0 <= y <= SHELLDIMENSIONS.h):
+    if not (0 <= x <= SHELLDIMENSIONS.h and 0 <= y <= SHELLDIMENSIONS.w):
         raise OverflowError(f"{x}, {y} out of window.")
     dif = max(0, y - (SHELLDIMENSIONS.h - 1))
     if dif > 0:
