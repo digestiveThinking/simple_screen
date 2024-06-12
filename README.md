@@ -44,10 +44,17 @@ Aquí tienes un listado de las funciones públicas del archivo proporcionado jun
 11. **paper(color: Color, refresh: bool = True)**
     - Cambia el color del "papel" (fondo) al color de fondo especificado y opcionalmente refresca la pantalla para mostrar los cambios inmediatamente.
 
-12. **app(func: Callable[..., None]) -> Callable[..., None]**
+12. **center(cad: str) -> int**
+    - Devuelve la columna en que debe imprimirse la cadena cad para estar centrada en la 
+    ventana actual.
+
+13. **center_print(cad: str, fila: int = 0)**
+    - Imprime la cadena cad centrada en la fila que se indique, o en cero.
+
+14. **app(func: Callable[..., None]) -> Callable[..., None]**
     - Decorador que asegura que la función proporcionada se ejecute en un contexto de curses y llama a `_end()` al finalizar la ejecución.
 
-13. **Simple_ScreenContextManager**
+15. **Simple_ScreenContextManager**
     - Clase manejadora de contexto para asegurar que `finish()` se llame al salir del bloque `with`.
 
 ### Explicación detallada de las funciones internas:

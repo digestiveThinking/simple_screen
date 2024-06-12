@@ -119,6 +119,14 @@ def Input(mensaje: str = "") -> str:
     return user_input
 
 
+def center(cad: str) -> int:
+    return (DIMENSIONS.w - len(cad)) // 2
+
+
+def center_print(cad, fila: int = 0):
+    locate(center(cad), fila)
+    Print(cad)
+
 def inkey(timeout: int = 100) -> str:
     curses.curs_set(0)
     curses.noecho()
