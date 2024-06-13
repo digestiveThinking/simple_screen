@@ -1,9 +1,10 @@
-# key_constants.py
+import curses
 
-ESC = chr(27)
-ENTER = chr(10)
-BACKSPACE = chr(8)
-TAB = chr(9)
+# Definir las constantes de teclas especiales
+ESC = chr(27)       # '\x1b'
+ENTER = chr(10)     # '\n'
+BACKSPACE = (chr(8), chr(127))  # '\x08'
+TAB = chr(9)        # '\t'
 STAB = "KEY_STAB"
 UP = "KEY_UP"
 DOWN = "KEY_DOWN"
@@ -28,29 +29,30 @@ F10 = "KEY_F10"
 F11 = "KEY_F11"
 F12 = "KEY_F12"
 
-# Mapa de valores curses a nuestras constantes
+# Mapear las teclas especiales a sus constantes
 key_map = {
-    353: STAB,
-    259: UP,
-    258: DOWN,
-    260: LEFT,
-    261: RIGHT,
-    331: IC,
-    330: DC,
-    262: HOME,
-    360: END,
-    339: PPAGE,
-    338: NPAGE,
-    265: F1,
-    266: F2,
-    267: F3,
-    268: F4,
-    269: F5,
-    270: F6,
-    271: F7,
-    272: F8,
-    273: F9,
-    274: F10,
-    275: F11,
-    276: F12,
+    curses.KEY_UP: UP,
+    curses.KEY_DOWN: DOWN,
+    curses.KEY_LEFT: LEFT,
+    curses.KEY_RIGHT: RIGHT,
+    curses.KEY_STAB: STAB,
+    curses.KEY_IC: IC,
+    curses.KEY_DC: DC,
+    curses.KEY_HOME: HOME,
+    curses.KEY_END: END,
+    curses.KEY_PPAGE: PPAGE,
+    curses.KEY_NPAGE: NPAGE,
+    curses.KEY_F1: F1,
+    curses.KEY_F2: F2,
+    curses.KEY_F3: F3,
+    curses.KEY_F4: F4,
+    curses.KEY_F5: F5,
+    curses.KEY_F6: F6,
+    curses.KEY_F7: F7,
+    curses.KEY_F8: F8,
+    curses.KEY_F9: F9,
+    curses.KEY_F10: F10,
+    curses.KEY_F11: F11,
+    curses.KEY_F12: F12,
+    #ESC: ESC
 }

@@ -127,13 +127,19 @@ def center_print(cad, fila: int = 0):
     locate(center(cad), fila)
     Print(cad)
 
+
 def inkey(timeout: int = 100) -> str:
     curses.curs_set(0)
     curses.noecho()
     STDSRC.nodelay(1)
     STDSRC.timeout(timeout)
-    key = STDSRC.getch()
-    return "" if key == -1 else key_map.get(key, chr(key))
+    try:
+        key = STDSRC.get_wch()
+        if key == chr(27):
+            a = 3
+    except curses.error:
+        key = -1
+    return "" if key == -1 else key_map.get(key, key)
 
 
 def _create_color(ix: int, color: Color):
