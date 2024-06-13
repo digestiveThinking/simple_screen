@@ -35,7 +35,6 @@ key_map = {
     curses.KEY_DOWN: DOWN,
     curses.KEY_LEFT: LEFT,
     curses.KEY_RIGHT: RIGHT,
-    curses.KEY_STAB: STAB,
     curses.KEY_IC: IC,
     curses.KEY_DC: DC,
     curses.KEY_HOME: HOME,
@@ -54,5 +53,6 @@ key_map = {
     curses.KEY_F10: F10,
     curses.KEY_F11: F11,
     curses.KEY_F12: F12,
-    #ESC: ESC
+    340: STAB,
+    353: STAB
 }

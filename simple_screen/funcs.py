@@ -135,8 +135,6 @@ def inkey(timeout: int = 100) -> str:
     STDSRC.timeout(timeout)
     try:
         key = STDSRC.get_wch()
-        if key == chr(27):
-            a = 3
     except curses.error:
         key = -1
     return "" if key == -1 else key_map.get(key, key)
