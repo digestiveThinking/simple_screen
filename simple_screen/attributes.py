@@ -1,14 +1,7 @@
 import curses
+from collections import namedtuple
+from simple_screen import STDSRC
 
-A_NORMAL = curses.A_NORMAL
-A_STANDOUT = curses.A_STANDOUT
-A_UNDERLINE = curses.A_UNDERLINE
-A_REVERSE = curses.A_REVERSE
-A_BLINK = curses.A_BLINK
-A_DIM = curses.A_DIM
-A_BOLD = curses.A_BOLD
-A_ALTCHARSET = curses.A_ALTCHARSET
-A_INVIS = curses.A_INVIS
-A_PROTECT = curses.A_PROTECT
-A_CHARTEXT = curses.A_CHARTEXT
+
+        
 

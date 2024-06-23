@@ -2,6 +2,7 @@ import curses
 from .entities import Position, Color, Dimensions
 from .keys import key_map
 from typing import Callable
+from collections import namedtuple
 
 STDSRC = None
 POS = Position(0, 0)
@@ -108,11 +109,13 @@ def Print(cadena: object = "", refresh: bool = True):
 def Input(mensaje: str = "") -> str:
     curses.curs_set(1)
     STDSRC.nodelay(0)
-    STDSRC.attron(curses.A_REVERSE)
+    # STDSRC.attron(curses.A_REVERSE)
+    A_REVERSE.on()
     STDSRC.addstr(mensaje, curses.color_pair(ACTIVE_PAIR))
     curses.echo()
     user_input = STDSRC.getstr(curses.color_pair(ACTIVE_PAIR)).decode('utf-8')
-    STDSRC.attroff(curses.A_REVERSE)
+    # STDSRC.attroff(curses.A_REVERSE)
+    A_REVERSE.off()
     curses.noecho()
     curses.curs_set(0)
     _retrievePos()
@@ -185,6 +188,33 @@ class Simple_ScreenContextManager:
     def __exit__(self, exc_type, exc_value, traceback):
         finish()
         return False
+
+
+class Screen_Attribute(namedtuple('Attribute', ('name', 'value'))):
+    __slots__ = ()
+
+    def __new__(cls, name):
+        value = getattr(curses, name)
+        return super(Screen_Attribute, cls).__new__(cls, name, value)
+    
+    def on(self):
+        STDSRC.attron(self.value)
+
+    def off(self):
+        STDSRC.attroff(self.value)
+
+
+A_NORMAL = Screen_Attribute("A_NORMAL")
+A_STANDOUT = Screen_Attribute("A_STANDOUT")
+A_UNDERLINE = Screen_Attribute("A_UNDERLINE")
+A_REVERSE = Screen_Attribute("A_REVERSE")
+A_BLINK = Screen_Attribute("A_BLINK")
+A_DIM = Screen_Attribute("A_DIM")
+A_BOLD = Screen_Attribute("A_BOLD")
+A_ALTCHARSET = Screen_Attribute("A_ALTCHARSET")
+A_INVIS = Screen_Attribute("A_INVIS")
+A_PROTECT = Screen_Attribute("A_PROTECT")
+A_CHARTEXT = Screen_Attribute("A_CHARTEXT")
 
 
 init()
