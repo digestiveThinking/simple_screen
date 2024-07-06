@@ -67,6 +67,17 @@ Aquí tienes un listado de las funciones públicas del archivo proporcionado jun
 15. **Simple_ScreenContextManager**
     - Clase manejadora de contexto para asegurar que `finish()` se llame al salir del bloque `with`.
 
+16. **Atributos** Se pueden activar y desactivar los siguientes atributos del texto. Por ejemplo, para activar la negrita usar **A_BOLD.on()** y para volver a desactivar **A_BOLD.off()**.
+     - **A_NORMAL**: Atributo estándar sin formato especial aplicado.
+     - **A_STANDOUT**: Atributo que hace que el texto se destaque, usualmente mediante la inversión de colores o un cambio de color de fondo.
+     - **A_UNDERLINE**: Atributo que subraya el texto.
+     - **A_REVERSE**: Atributo que invierte los colores del texto y del fondo.
+     - **A_BLINK**: Atributo que hace que el texto parpadee.
+     - **A_DIM**: Atributo que reduce el brillo del texto.
+     - **A_BOLD**: Atributo que hace que el texto sea negrita o más brillante.
+     - **A_INVIS**: Atributo que hace que el texto sea invisible.
+
+
 ### Explicación detallada de las funciones internas:
 
 1. **_init_curses()**

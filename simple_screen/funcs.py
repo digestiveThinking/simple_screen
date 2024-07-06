@@ -211,10 +211,8 @@ A_REVERSE = Screen_Attribute("A_REVERSE")
 A_BLINK = Screen_Attribute("A_BLINK")
 A_DIM = Screen_Attribute("A_DIM")
 A_BOLD = Screen_Attribute("A_BOLD")
-A_ALTCHARSET = Screen_Attribute("A_ALTCHARSET")
 A_INVIS = Screen_Attribute("A_INVIS")
-A_PROTECT = Screen_Attribute("A_PROTECT")
-A_CHARTEXT = Screen_Attribute("A_CHARTEXT")
+
 
 
 init()
