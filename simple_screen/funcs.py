@@ -98,7 +98,7 @@ def Print(cadena: object = "", refresh: bool = True):
     global SCROLLACUM
 
     STDSRC.addstr(f"{str(cadena)}", curses.color_pair(ACTIVE_PAIR))
-    STDSRC.scroll(SCROLLACUM)
+    #STDSRC.scroll(SCROLLACUM)
     SCROLLACUM = 0
     if refresh:
         STDSRC.refresh()
