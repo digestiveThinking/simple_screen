@@ -3,6 +3,4 @@ venv/
 **__pycache__/
 dist/
 simple_screen.egg-info/
-probes/
-hola**.py
 setup.py

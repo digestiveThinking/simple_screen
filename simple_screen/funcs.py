@@ -58,10 +58,11 @@ def init():
     No hay buffer, al hacer scroll se pierden los contenidos de
     las lineas superiores
     '''
-    STDSRC.resize(DIMENSIONS.h + 1, DIMENSIONS.w)
+    #STDSRC.resize(DIMENSIONS.h + 1, DIMENSIONS.w)
     MAX_PAIRS = curses.COLOR_PAIRS
     MAX_COLORS = curses.COLORS
-    pair(FOREGROUND, BACKGROUND)
+    
+    #pair(FOREGROUND, BACKGROUND)
 
 
 def finish():
